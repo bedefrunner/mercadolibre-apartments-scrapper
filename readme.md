@@ -38,9 +38,9 @@ To notify every new apartment to your Whatsapp number you will need to setup the
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-                                      from_='whatsapp:+14155238886',
-                                      body='Hello, there!',
-                                      to='whatsapp:+<your-whatsapp-number>'
+                                      from_=f"whatsapp:{os.getenv('TWILIO_SENDER_WHATSAPP_NUMBER')}",
+                                      to=f"whatsapp:{os.getenv('RECEIVER_WHATSAPP_NUMBER')}",
+                                      body='Hello, there!'
                                   )
 
         print(message.sid)
