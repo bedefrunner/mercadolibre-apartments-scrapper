@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class MercadoLibreScrapper:
-  URL = "https://listado.mercadolibre.cl/inmuebles/departamentos/arriendo/rm-metropolitana/las-condes/_PriceRange_0CLP-1200000CLP_PublishedToday_YES_BEDROOMS_3-*_FULL*BATHROOMS_2-*_NoIndex_True_TOTAL*AREA_100-*#applied_filter_id%3DTOTAL_AREA%26applied_filter_name%3DSuperficie+total%26applied_filter_order%3D6%26applied_value_id%3D100-*%26applied_value_name%3D100-*%26applied_value_order%3D5%26applied_value_results%3DUNKNOWN_RESULTS%26is_custom%3Dtrue"
+  URL = "https://listado.mercadolibre.cl/inmuebles/departamentos/arriendo/rm-metropolitana/las-condes/_PriceRange_10CLP-1200000CLP_PublishedToday_YES_BEDROOMS_3-*_FULL*BATHROOMS_2-*_NoIndex_True_TOTAL*AREA_100-*#applied_filter_id%3DTOTAL_AREA%26applied_filter_name%3DSuperficie+total%26applied_filter_order%3D6%26applied_value_id%3D100-*%26applied_value_name%3D100-*%26applied_value_order%3D5%26applied_value_results%3DUNKNOWN_RESULTS%26is_custom%3Dtrue"
 
   def get_apartments_data_from_mercado_libre(self):
     search_results = self.get_search_results()
