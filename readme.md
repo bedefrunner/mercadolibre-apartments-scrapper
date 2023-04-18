@@ -13,7 +13,7 @@ $ pip3 install -r requirements.txt
 ## 3. Replace the apartments URL
 First, go to [Mercado Libre > apartments](https://www.mercadolibre.cl/c/inmuebles#menu=categories) and add the filters you want to your search. Every filter adds a new param to the URL. When you are comfortable with your filters, copy the URL and add replace the `URL` constant of class `MercadoLibreScrapper` with your URL.
 
-If you want to run this crapper on a daily basis, I recommend to add the filter "publicados hoy", because there's no need to check for every apartment published in the history if you are checking them every day.
+If you want to run this scrapper on a daily basis, I recommend you to add the filter "Publicados hoy" in Mercado Libre because there's no need to check for every apartment published in the history if you are checking them every day.
 
 ## 4. Setup your Twilio API credentias
 To notify every new apartment to your Whatsapp number you will need to setup the Twilio API. I don't remember the exact steps, but it's something like this:
@@ -62,23 +62,21 @@ python3 main.py
 ```
 
 # Not-database
-You don't want the scrapper to notify you twice the same apartment, so you need some sort of "database" to keep track of the apartments you have already notify.
+You don't want this app to notify you the same apartment more than once, so you need some sort of database to keep track of the apartments you have already notified.
 
-This code has no real database connection, but instead uses a .json file called `APARTMENTS_ALREADY_SEEN.json` that acts as a database table. Every time the scrapper finds an apartment, it does the following:
-1. Checks if exists in this file
+This code has no real database connection. Instead it uses a .json file called `apartments_already_seen.json` that acts as a database table. Every time the scrapper finds an apartment, it does the following:
+1. Checks if it exists in this file
 2. If it does, it doesn't notify it, because it assumes it was notified before.
 3. If it doesn't, it notifies it and then adds it to this file.
 
-It works just fine.
-
-The only bad thing is that **with every deployment the .json file is overwritten with your local .json file**, deleting all of your records in production. In my case this wasn't a big problem because the URL had the filter of "publicados hoy", so all the apartments that were published before today were not going to be found by the scrapper anyway, and therefore not notified. But if this a real problem with your use case, you should consider connecting to a real DB.
+The only bad thing is that **with every deployment the .json file is overwritten with your local .json file**, deleting all of your records in production. In my case this wasn't a big problem because the URL had the filter of "Publicados hoy", so all the apartments that were published before today were not going to be found by the scrapper anyway, and therefore not notified. But if this a real problem with your use case, you should consider connecting to a real DB.
 
 # Recommended deployment in Wayscript
-I recommend deploying this code with. It's a tool that allows you to write and deploy code very easily. Just go to https://www.wayscript.com/, create a free account and follow the instructions to start writing and deploying code.
+I recommend deploying this code with Wayscript. It's a tool that allows you to write and deploy code very easily. Just go to https://www.wayscript.com/, create an account and follow the instructions to start writing and deploying code.
 
-The only bad thing is that they don't have a database add-on, so you can't create a database right there. I guess there are many online tools to create a remote DB and read/write to it via an API. But in my case I just created my super not-database that I explained before and worked fine.
+The only bad thing is that they don't have a database add-on, so you can't create a database right there (yet, because there are launching one soon!). I guess there are many online tools to create a remote DB and read/write to it via an API.
 
 ## Schedule a task in Wayscript
 It's also very easy to setup an scheduled task (cron job) in Wayscript, only a few clics are needed. You can read the documentation [here](https://docs.wayscript.com/quickstart-schedule-task/python/schedule-a-task).
 
-👁️ Wayscript free trial allows you to make 100 invocations per month. This means you want your cron job to run no more than 3 times per day. If you updgrade to the paid plan, 10,000 invocations are allowed.
+👁️ Wayscript free trial allows you to make 100 invocations per month. This means you want your cron job to run no more than 3 times per day. If you updgrade to the $10/month plan, 10,000 invocations are allowed.
